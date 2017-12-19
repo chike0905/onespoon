@@ -9,24 +9,14 @@
 
                 <div class="panel-body" id="menue">
                   <ul class="list-group">
-                      <li class="list-group-item" id="0">
-                        <p>マー油豚骨醤油</p>
-                        <div id="foodid" style="display:none;">0</div>
+                     @foreach($foods as $food)
+                     <li class="list-group-item" id="{{ $food['id'] }}">
+                        <p>{{ $food['name'] }}</p>
+                        <div id="foodid" style="display:none;">{{ $food['id'] }}</div>
                         <span class="badge">0</span>
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#orderModal" onclick="selectorder(0)">選択</button>
-                      </li>
-                      <li class="list-group-item" id="1">
-                        <p>味噌豚骨醤油</p>
-                        <div id="foodid" style="display:none;">1</div>
-                        <span class="badge">0</span>
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#orderModal" onclick="selectorder(1)">選択</button>
-                      </li>
-                      <li class="list-group-item" id="2">
-                        <p>豚骨醤油</p>
-                        <div id="foodid" style="display:none;">2</div>
-                        <span class="badge">0</span>
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#orderModal" onclick="selectorder(2)">選択</button>
-                      </li>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#orderModal" onclick="selectorder({{ $food['id'] }})">選択</button>
+                     </li>
+                     @endforeach
                   </ul>
                   <script>
                     function selectorder(id){
