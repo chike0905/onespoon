@@ -16,6 +16,7 @@ class CreateOrdersTable extends Migration
           $table->increments('id');
           $table->integer('foodid');
           $table->integer('num');
+          $table->integer('share')->default(0);
           $table->timestamps();
         });
     }

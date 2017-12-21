@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container text-center">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
@@ -24,7 +24,7 @@
                                 <td>{{$order["id"]}}</td>
                                 <td>{{ $order["foodname"] }}</td>
                                 <td>{{ $order["num"] }}</td>
-                                <td>0 / {{ $order["num"] }}</td>
+                                <td>{{ $order["share"] }} / {{ $order["num"] }}</td>
                                 <td> <button class="btn-primary">完了</button> </td>
                             </tr>
                             @endforeach
