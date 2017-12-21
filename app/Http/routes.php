@@ -20,4 +20,5 @@ Route::auth();
 route::get('/home', 'homecontroller@index');
 route::get('/kitchen', 'KitchenController@index');
 route::get('/order', 'OrderController@index');
+route::post('/order/submit', 'OrderController@submit');
 route::get('/table', 'TableController@index');

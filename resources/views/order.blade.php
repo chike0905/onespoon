@@ -67,9 +67,9 @@
                                 nullflag = 0;
                                 $("#submitModal tbody")[0].innerHTML += `
                                     <tr>
-                                        <th scope="row">`+id+`</th>
-                                        <td>`+food+`</td>
-                                        <td>`+num+`</td>
+                                        <th id="foodid" scope="row">`+id+`</th>
+                                        <td id="food">`+food+`</td>
+                                        <td id="num">`+num+`</td>
                                     </tr>
                                     `;
                             }
@@ -93,6 +93,33 @@
                                 </table>
                                 `;
                     }
+                    function submitorder(){
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                        datas = []
+                        for(var a=0; a< $("#ordertable th#foodid").length; a++){
+                            var foodid = $("#ordertable th#foodid")[a].innerHTML;
+                            var num = $("#ordertable td#num")[a].innerHTML;
+                            datas.push({id:foodid, num:num})
+                        }
+                        var data = {data: datas};
+                        $.ajax({
+                            type : "post",
+                            url : './order/submit',
+                            dataType : "json",
+                            data: data,
+                            success : function(json) {
+                                console.log(json)
+                            },
+                            error : function(XMLHttpRequest, textStatus, errorThrown) {
+                                console.log("Error: " + textStatus + ":" + errorThrown);
+                            }
+                        });
+                        clearsubmittable();
+                    }
                   </script>
                   <!-- モーダル・ダイアログ -->
                   <div class="modal fade" id="submitModal" tabindex="-1">
@@ -114,7 +141,7 @@
                               </tbody>
                           </table>
                         </div>
-                        <button type="button" class="btn-primary" data-dismiss="modal" onclick="clearsubmittable()">確定</button>
+                        <button type="button" class="btn-primary" data-dismiss="modal" onclick="submitorder()">確定</button>
                         </div>
                       </div>
                     </div>
